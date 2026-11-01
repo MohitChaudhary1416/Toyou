@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Kalpana 💖</title>
+<style>
+:root{--bg1:#ffe3ec;--bg2:#ffc7da;--card:#ffffff;--text:#4a1d33;--accent:#e63977;--soft:#9b5470;--dot:#f3b6cb}
+@media (prefers-color-scheme:dark){:root{--bg1:#2a0f1c;--bg2:#3d1428;--card:#3a1a2b;--text:#ffe6ef;--accent:#ff6b9d;--soft:#e8a6bf;--dot:#6a2b47}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Georgia,"Times New Roman",serif;color:var(--text);background:linear-gradient(160deg,var(--bg1),var(--bg2));overflow-x:hidden;text-align:center}
+.screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+#intro .big{font-size:4rem;margin-bottom:12px;animation:beat 1.2s infinite}
+#intro p{color:var(--soft);margin:0 0 28px;font-size:1.1rem}
+.btn{font-family:inherit;font-size:1.1rem;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:14px 30px;cursor:pointer;box-shadow:0 8px 24px rgba(230,57,119,.4)}
+.btn:active{transform:scale(.96)}
+#intro .btn{animation:pulse 1.6s infinite}
+#main{display:none}
+.card{background:var(--card);max-width:440px;width:92%;border-radius:24px;padding:28px 22px 24px;box-shadow:0 12px 40px rgba(0,0,0,.15);animation:rise .9s ease both}
+h1{margin:0 0 6px;font-size:1.7rem;color:var(--accent)}
+.sub{color:var(--soft);margin:0 0 16px;font-style:italic}
+.photo{width:180px;height:180px;margin:0 auto 16px;border-radius:50%;border:5px solid var(--accent);overflow:hidden;box-shadow:0 0 0 8px var(--dot)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.chap{display:none}
+.chap.show{display:block;animation:rise .8s ease both}
+.msg{min-height:11em;line-height:1.7;font-size:1.05rem;margin:0 0 14px;text-align:left}
+.sig{color:var(--accent);font-size:1.15rem;font-style:italic;margin-bottom:16px}
+.dots{display:flex;justify-content:center;gap:8px;margin-bottom:16px}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--dot);transition:.3s}
+.dots i.on{background:var(--accent);transform:scale(1.4)}
+.row{display:flex;justify-content:center;gap:10px}
+.btn.alt{background:transparent;color:var(--accent);border:2px solid var(--accent);box-shadow:none}
+.heart{position:fixed;top:-30px;pointer-events:none;animation:fall linear forwards;z-index:5}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2}}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes beat{50%{transform:scale(1.15)}}
+@keyframes pulse{50%{transform:scale(1.05)}}
+</style>
+</head>
+<body>
+
+<section id="intro" class="screen">
+  <div class="big">💌</div>
+  <p>I made something just for you…</p>
+  <button class="btn" id="open">Tap to open</button>
+</section>
+
+<section id="main" class="screen">
+  <div class="card">
+    <div class="photo"><img src="kal4.png" alt="Us"></div>
+
+    <div class="chap" data-title="Happy Birthday, Kalpana 🎂" data-sub="Today is all about you ✨"
+         data-text="Kalpana, you make every day brighter just by being you. Your smile is my favorite thing in the world, and I’m so lucky to have you. Thank you for your love, your laughter, and for being you. Today the whole world should celebrate you, because you are the best thing that ever happened to me. 💖"></div>
+
+    <div class="chap" data-title="How It All Began 🌸" data-sub="The first chapter of us"
+         data-text="I still remember the beginning: the nervous smiles, the long chats, the way time disappeared whenever I was talking to you. I didn’t know it yet, but my heart had already chosen you. Every message made me smile, every hello felt like butterflies, and slowly I realized I was falling for you, softly, sweetly, completely. 🦋"></div>
+
+    <div class="chap" data-title="Our Little Moments 🤍" data-sub="The ones I replay again and again"
+         data-text="Our first hug felt like the world finally went quiet. Your arms felt like home. And our kiss… I still smile every time I think about it, my heart racing and everything else fading away. Those moments are my favorite memories, and I keep them close to my heart. 💋"></div>
+    <div class="chap" data-title="And I Want More 💞" data-sub="Because once was never going to be enough"
+         data-text="I want more of you: more hugs that last too long, more kisses that make me forget the world, more late talks, more laughter, more of your hand in mine. More sunsets, more adventures, more ordinary days that feel special just because you are in them. I want more of us, today, tomorrow, and for all the days to come. 🌹"></div>
+
+    <div class="chap" data-title="Forever Yours 💕" data-sub="One last thing"
+         data-text="Happy Birthday, my love. Thank you for being my peace, my happiness, and my favorite person. Whatever comes next, I want to walk through it with you. I love you, Kalpana, today and always. 💖"></div>
+
+    <h1 id="t"></h1>
+    <p class="sub" id="s"></p>
+    <p class="msg" id="m"></p>
+    <div class="sig">Forever yours 💕</div>
+    <div class="dots" id="dots"></div>
+    <div class="row">
+      <button class="btn alt" id="back">Back</button>
+      <button class="btn" id="next">Next 💌</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var ch=[].slice.call(document.querySelectorAll(".chap")),cur=0,timer=null;
+  var t=document.getElementById("t"),s=document.getElementById("s"),m=document.getElementById("m");
+  var dots=document.getElementById("dots"),back=document.getElementById("back"),next=document.getElementById("next");
+  var hearts=["💖","💕","💗","🌸","✨","💘"];
+  ch.forEach(function(){dots.appendChild(document.createElement("i"));});
+
+  function rain(n){
+    for(var i=0;i<n;i++){(function(i){setTimeout(function(){
+      var h=document.createElement("div");h.className="heart";
+      h.textContent=hearts[Math.floor(Math.random()*hearts.length)];
+      h.style.left=Math.random()*100+"vw";
+      h.style.fontSize=(16+Math.random()*22)+"px";
+      h.style.animationDuration=(3+Math.random()*3)+"s";
+      document.body.appendChild(h);
+      setTimeout(function(){h.remove();},6500);
+    },i*120);})(i);}
+  }
+  function show(i){
+    cur=i;clearTimeout(timer);
+    var c=ch[i];
+    t.textContent=c.dataset.title;s.textContent=c.dataset.sub;m.textContent="";
+    [t,s,m].forEach(function(e){e.style.animation="none";e.offsetHeight;e.style.animation="rise .8s ease both";});
+    [].forEach.call(dots.children,function(d,j){d.className=j===i?"on":"";});
+    back.style.visibility=i===0?"hidden":"visible";
+    next.textContent=i===ch.length-1?"Replay 🔁":"Next 💌";
+    var txt=c.dataset.text,k=0;
+    (function step(){if(k<=txt.length){m.textContent=txt.slice(0,k++);timer=setTimeout(step,28);}})();
+    rain(i===ch.length-1?60:18);
+  }
+  document.getElementById("open").onclick=function(){
+    document.getElementById("intro").style.display="none";
+    document.getElementById("main").style.display="flex";
+    show(0);rain(40);
+  };
+  next.onclick=function(){show(cur===ch.length-1?0:cur+1);};
+  back.onclick=function(){if(cur>0)show(cur-1);};
+})();
+</script>
+</body>
+<div class="photo"><img src="kal3.jpeg" alt="Us"></div>
+<p>Kalpana, I tried to tell my heart to calm down around you. 😅
+My heart said, “Sorry, I’m not the boss here, she is.”
+I asked my brain for help, but it left the chat the moment you smiled.
+Even my phone knows the truth, because your name is saved as “Airman 💖”, and it’s the only contact I never want to mute.
+They say love makes you hungry, but I’m only hungry for more of your hugs.
+So today, birthday girl, you get unlimited cake and unlimited me.
+No refunds, no returns, and the warranty lasts forever😘.</p>
+</html>
